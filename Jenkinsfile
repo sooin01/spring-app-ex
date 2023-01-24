@@ -4,13 +4,13 @@ node {
     }
 
     stage('Docker image build') {
-        sh '''cd ${env.WORKSPACE}
-        sudo docker build -t ${env.JOB_NAME} .'''
+        sh "cd ${env.WORKSPACE}"
+        sh "sudo docker build -t ${env.JOB_NAME} ."
     }
     
     stage('Docker container stop/remove') {
-        sh '''sudo docker stop ${env.JOB_NAME}
-        sudo docker rm ${env.JOB_NAME}'''
+        sh "sudo docker stop ${env.JOB_NAME}"
+        sh "sudo docker rm ${env.JOB_NAME}"
     }
     
     stage('Docker container run') {
