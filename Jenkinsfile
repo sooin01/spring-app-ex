@@ -1,5 +1,5 @@
 node {
-    # comment
+    // comment
     stage('Jar build') {
         sh "${env.WORKSPACE}/mvnw -Dmaven.test.skip=true clean package"
     }
