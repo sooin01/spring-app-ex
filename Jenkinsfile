@@ -1,8 +1,4 @@
-node {
-    stage('Git pull') {
-        git credentialsId: 'sooin01', url: 'https://github.com/sooin01/spring-app-ex.git'
-    }
-    
+node {    
     stage('Jar build') {
         sh "${env.WORKSPACE}/mvnw -Dmaven.test.skip=true clean package"
     }
