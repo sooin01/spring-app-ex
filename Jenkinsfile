@@ -1,11 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Git pull') {
-            git credentialsId: 'sooin01', url: 'https://github.com/sooin01/spring-app-ex.git'
-        }
-        
+    stages {        
         stage('Jar build') {
             sh "${env.WORKSPACE}/mvnw -Dmaven.test.skip=true clean package"
         }
