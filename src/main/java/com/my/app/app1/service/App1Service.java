@@ -1,6 +1,8 @@
 package com.my.app.app1.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,16 @@ public class App1Service {
 	
 	public List<TbUserVo> retrieveUsers2() {
 		return sqlSession.selectList("tbUser.retrieveUsers");
+	}
+	
+	public int createUsers() {
+		TbUser tbUser = new TbUser();
+		tbUser.setUserId(UUID.randomUUID().toString());
+		tbUser.setUserName("이름3");
+		tbUser.setCreateDt(new Date());
+		tbUser.setUpdateDt(new Date());
+		app1Repository.save(tbUser);
+		return 1;
 	}
 	
 }

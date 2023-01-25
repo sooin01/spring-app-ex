@@ -16,8 +16,13 @@ public class App1Controller {
 	private App1Service app1Service;
 
 	@GetMapping("/")
-	public List<TbUser> index() {
+	public List<TbUser> retrieveUsers() {
 		return app1Service.retrieveUsers();
+	}
+	
+	@GetMapping("/users")
+	public int createUsers() {
+		return app1Service.createUsers();
 	}
 	
 }

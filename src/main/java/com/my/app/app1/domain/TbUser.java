@@ -1,5 +1,7 @@
 package com.my.app.app1.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -18,7 +20,7 @@ public class TbUser {
 	@Id
 	private String userId;
 	private String userName;
-	private String createDt;
-	private String updateDt;
+	private Date createDt;
+	private Date updateDt;
 	
 }
