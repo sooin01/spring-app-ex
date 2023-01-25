@@ -4,6 +4,15 @@ spring:
     username: stack
     password: admin123
     driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+
+logging:
+  level:
+    root: info
 
 mybatis:
   configuration:

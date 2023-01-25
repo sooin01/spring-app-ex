@@ -4,11 +4,11 @@
 <mapper namespace="tbUser">
 	
 	<select id="retrieveUsers" resultType="com.my.app.app1.vo.TbUserVo">
-		SELECT "USER_ID"
-		     , "USER_NAME"
-		     , "CREATE_DT"
-		     , "UPDATE_DT"
-         FROM public."TB_USER"
+		select user_id
+		     , user_name
+		     , create_dt
+		     , update_dt
+         from public.tb_user
 	</select>
 
 </mapper>
