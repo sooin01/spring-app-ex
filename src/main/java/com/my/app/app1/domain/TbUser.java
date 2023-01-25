@@ -1,11 +1,15 @@
 package com.my.app.app1.domain;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

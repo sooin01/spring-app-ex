@@ -3,7 +3,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tbUser">
 	
-	<select id="retrieveUsers" resultType="com.my.app.app1.vo.UserVo">
+	<select id="retrieveUsers" resultType="com.my.app.app1.vo.TbUserVo">
 		SELECT "USER_ID"
 		     , "USER_NAME"
 		     , "CREATE_DT"
