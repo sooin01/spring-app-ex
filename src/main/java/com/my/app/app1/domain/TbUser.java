@@ -1,9 +1,16 @@
 package com.my.app.app1.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,12 +22,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TbUser {
+public class TbUser implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String userId;
+	@Column(name = "user_id")
+	private String id;
 	private String userName;
 	private Date createDt;
 	private Date updateDt;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private List<TbUserEtc> tbUserEtcs;
 	
 }
