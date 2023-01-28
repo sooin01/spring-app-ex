@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.my.app.app1.common.repository.TbUserRepository;
 import com.my.app.app1.domain.TbUser;
-import com.my.app.app1.repository.App1Repository;
 import com.my.app.app1.vo.TbUserVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +24,10 @@ public class App1Service {
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private App1Repository app1Repository;
+	private TbUserRepository tbUserRepository;
 
 	public List<TbUser> retrieveUsers() {
-		return app1Repository.findAll();
+		return tbUserRepository.findAll();
 	}
 	
 	public List<TbUserVo> retrieveUsers2() {
@@ -35,7 +35,7 @@ public class App1Service {
 	}
 	
 	public int createUsers() {
-		Optional<TbUser> tbUserOptional = app1Repository.findById("1406f810-b1da-4143-8a93-4af39dcf2585");
+		Optional<TbUser> tbUserOptional = tbUserRepository.findById("1406f810-b1da-4143-8a93-4af39dcf2585");
 		
 		if (tbUserOptional.isPresent()) {
 			TbUser tbUser = tbUserOptional.get();
@@ -43,7 +43,7 @@ public class App1Service {
 			tbUser.setUserName("이름3");
 			tbUser.setCreateDt(new Date());
 			tbUser.setUpdateDt(new Date());
-			app1Repository.save(tbUser);
+			tbUserRepository.save(tbUser);
 			return 1;
 		}
 		

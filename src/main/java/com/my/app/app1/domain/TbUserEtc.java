@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,11 +26,12 @@ public class TbUserEtc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private TbUserEtcPk tbUserEtcPk;
+	@JsonUnwrapped
+	private TbUserEtcId tbUserEtcId;
 	private String userEtc1;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
 	@JsonBackReference
 	private TbUser tbUser;
 	

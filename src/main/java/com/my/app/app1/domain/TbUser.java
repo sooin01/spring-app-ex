@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,8 +32,8 @@ public class TbUser implements Serializable {
 	private Date createDt;
 	private Date updateDt;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private List<TbUserEtc> tbUserEtcs;
 	
 }
