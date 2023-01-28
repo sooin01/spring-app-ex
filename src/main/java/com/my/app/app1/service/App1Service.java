@@ -3,14 +3,19 @@ package com.my.app.app1.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.my.app.app1.common.repository.TbUserEtcRepository;
 import com.my.app.app1.common.repository.TbUserRepository;
 import com.my.app.app1.domain.TbUser;
+import com.my.app.app1.domain.TbUserEtc;
+import com.my.app.app1.dto.UserDto;
+import com.my.app.app1.dto.UserMapper;
 import com.my.app.app1.vo.TbUserVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +31,18 @@ public class App1Service {
 	@Autowired
 	private TbUserRepository tbUserRepository;
 
-	public List<TbUser> retrieveUsers() {
-		return tbUserRepository.findAll();
+	@Autowired
+	private TbUserEtcRepository tbUserEtcRepository;
+	
+	public List<UserDto> retrieveUsers() {
+		return tbUserRepository.findAll()
+				.stream()
+				.map(UserMapper.INSTANCE::toUserDto)
+				.collect(Collectors.toList());
+	}
+
+	public List<TbUserEtc> retrieveUserEtcs() {
+		return tbUserEtcRepository.findAll();
 	}
 	
 	public List<TbUserVo> retrieveUsers2() {

@@ -30,7 +30,7 @@ public class TbUserEtc implements Serializable {
 	private TbUserEtcId tbUserEtcId;
 	private String userEtc1;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
 	@JsonBackReference
 	private TbUser tbUser;
