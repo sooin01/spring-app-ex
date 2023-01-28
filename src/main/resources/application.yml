@@ -17,20 +17,6 @@ spring:
         "[format_sql]": true
         "[highlight_sql]": true
 
-logging:
-  level:
-    root: info
-    org:
-      hibernate:
-        SQL: debug
-        type:
-          descriptor:
-            sql:
-              BasicBinder: trace
-      springframework:
-        jdbc: debug
-        transaction: debug
-
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
