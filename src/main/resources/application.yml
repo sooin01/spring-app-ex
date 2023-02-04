@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://192.168.126.132:5432/testdb
+    url: jdbc:postgresql://192.168.126.132:5432/stack
     username: stack
     password: admin123
     driverClassName: org.postgresql.Driver
@@ -16,6 +16,11 @@ spring:
       hibernate:
         "[format_sql]": true
         "[highlight_sql]": true
+  thymeleaf:
+    cache: false
+
+server:
+  shutdown: graceful
 
 mybatis:
   configuration:

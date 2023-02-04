@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:replace="~{layout/header :: header}" />
+<script th:inline="javascript">
+function selectRow(userDto) {
+	$('#userId').val(userDto.userId);
+	$('#userName').val(userDto.userName);
+	$('#createDt').val(userDto.createDt);
+	$('#updateDt').val(userDto.updateDt);
+}
+</script>
+</head>
+<body>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">아이디</div>
+			<div class="col">이름</div>
+			<div class="col">생성날짜</div>
+			<div class="col">수정날짜</div>
+		</div>
+		<div class="row" th:each="userDto : ${userDtoList}" th:onclick="selectRow(userDto)">
+			<div class="col" th:text="${userDto.userId}"></div>
+			<div class="col" th:text="${userDto.userName}"></div>
+			<div class="col" th:text="${userDto.createDt}"></div>
+			<div class="col" th:text="${userDto.updateDt}"></div>
+		</div>
+
+		<div>
+			<form th:action="@{/users}" th:object="${userDto}" th:method="post">
+				<fieldset>
+					<p>사용자ID: <input th:type="text" th:field="*{userId}" style="width:300px;" /></p>
+					<p>사용자명: <input th:type="text" th:field="*{userName}" style="width:300px;" th:required="required" /></p>
+					<p>생성날짜: <input th:type="text" th:field="*{createDt}" style="width:300px;" /></p>
+					<p>수정날짜: <input th:type="text" th:field="*{updateDt}" style="width:300px;" /></p>
+					<p><input th:type="reset" value="초기화" /> <input th:type="submit" value="저장" /></p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
