@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class UserEtcDto {
+public class UserEtcResDto {
 	
 	private String userId;
 	private BigDecimal userEtcSeq;

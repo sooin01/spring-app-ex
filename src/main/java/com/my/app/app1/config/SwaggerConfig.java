@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -32,6 +33,7 @@ public class SwaggerConfig {
 				.useDefaultResponseMessages(false)
 				.produces(set)
 				.consumes(set)
+				.ignoredParameterTypes(ApiIgnore.class)
 				.apiInfo(apiInfo());
 	}
 	

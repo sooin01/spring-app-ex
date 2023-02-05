@@ -16,16 +16,16 @@ public interface UserMapper {
 	@Mapping(target = "createDt", dateFormat = "yyyy-MM-dd")
 	@Mapping(target = "updateDt", dateFormat = "yyyy-MM-dd")
 	@Mapping(source = "tbUserEtcs", target = "userEtcs")
-	UserDto toUserDto(TbUser tbUser);
+	UserResDto toUserDto(TbUser tbUser);
 
 	@Mapping(source = "userId", target = "id")
 	@Mapping(target = "createDt", dateFormat = "yyyy-MM-dd")
 	@Mapping(target = "updateDt", dateFormat = "yyyy-MM-dd")
 	@Mapping(target = "tbUserEtcs", ignore = true)
-	TbUser toTbUser(UserDto userDto);
+	TbUser toTbUser(UserReqDto userReqDto);
 
 	@Mapping(source = "tbUserEtcId.id", target = "userId")
 	@Mapping(source = "tbUserEtcId.userEtcSeq", target = "userEtcSeq")
-	UserEtcDto toUserEtcDto(TbUserEtc tbUserEtc);
+	UserEtcResDto toUserEtcDto(TbUserEtc tbUserEtc);
 	
 }

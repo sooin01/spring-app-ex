@@ -1,12 +1,10 @@
 package com.my.app.app1.dto;
 
-import java.util.List;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class UserReqDto {
 	
 	@ApiModelProperty
 	private String userId;
@@ -16,6 +14,5 @@ public class UserDto {
 	private String createDt;
 	@ApiModelProperty
 	private String updateDt;
-	private List<UserEtcDto> userEtcs;
 	
 }

@@ -14,9 +14,10 @@ import com.my.app.app1.common.exception.BizException;
 import com.my.app.app1.common.repository.TbUserEtcRepository;
 import com.my.app.app1.common.repository.TbUserRepository;
 import com.my.app.app1.domain.TbUser;
-import com.my.app.app1.dto.UserDto;
-import com.my.app.app1.dto.UserEtcDto;
+import com.my.app.app1.dto.UserEtcResDto;
 import com.my.app.app1.dto.UserMapper;
+import com.my.app.app1.dto.UserReqDto;
+import com.my.app.app1.dto.UserResDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,49 +32,49 @@ public class App1Service {
 	@Autowired
 	private TbUserEtcRepository tbUserEtcRepository;
 	
-	public List<UserDto> retrieveUsers() {
+	public List<UserResDto> retrieveUsers() {
 		return tbUserRepository.findAll()
 				.stream()
 				.map(UserMapper.INSTANCE::toUserDto)
 				.collect(Collectors.toList());
 	}
 	
-	public UserDto retrieveUser(UserDto userDto) {
-		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userDto.getUserId());
+	public UserResDto retrieveUser(UserReqDto userReqDto) {
+		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userReqDto.getUserId());
 		
 		if (tbUserOpt.isPresent()) {
 			return UserMapper.INSTANCE.toUserDto(tbUserOpt.get());
 		} else {
-			throw new BizException("Not found " + userDto.getUserId());
+			throw new BizException("Not found " + userReqDto.getUserId());
 		}
 	}
 	
-	public List<UserEtcDto> retrieveUserEtcs() {
+	public List<UserEtcResDto> retrieveUserEtcs() {
 		return tbUserEtcRepository.findAll()
 				.stream()
 				.map(UserMapper.INSTANCE::toUserEtcDto)
 				.collect(Collectors.toList());
 	}
 	
-	public UserDto saveUser(UserDto userDto) {
-		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userDto.getUserId());
+	public UserResDto saveUser(UserReqDto userReqDto) {
+		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userReqDto.getUserId());
 		
 		if (tbUserOpt.isPresent()) {
-			TbUser tbUser = UserMapper.INSTANCE.toTbUser(userDto);
+			TbUser tbUser = UserMapper.INSTANCE.toTbUser(userReqDto);
 			tbUser.setTbUserEtcs(tbUserOpt.get().getTbUserEtcs());
 			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		} else {
 			TbUser tbUser = new TbUser();
 			tbUser.setId(UUID.randomUUID().toString());
-			tbUser.setUserName(userDto.getUserName());
+			tbUser.setUserName(userReqDto.getUserName());
 			tbUser.setCreateDt(new Date());
 			tbUser.setUpdateDt(new Date());
 			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		}
 	}
 	
-	public UserDto updateUser(UserDto userDto) {
-		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userDto.getUserId());
+	public UserResDto updateUser(UserReqDto userReqDto) {
+		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userReqDto.getUserId());
 		
 		if (tbUserOpt.isPresent()) {
 			TbUser tbUser = tbUserOpt.get();
@@ -83,7 +84,7 @@ public class App1Service {
 			tbUser.setUpdateDt(new Date());
 			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		} else {
-			throw new BizException("Not found " + userDto.getUserId());
+			throw new BizException("Not found " + userReqDto.getUserId());
 		}
 	}
 	
