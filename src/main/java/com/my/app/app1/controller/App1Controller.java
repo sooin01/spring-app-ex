@@ -42,7 +42,7 @@ public class App1Controller {
 	public String retrieveUserList(ModelMap model, UserDto userDto) {
 		List<UserDto> userDtoList = app1Service.retrieveUsers();
 		model.addAttribute("userDtoList", userDtoList);
-		return "app1/index";
+		return "app1/list";
 	}
 
 	@PostMapping("/users")
