@@ -13,30 +13,40 @@ function selectRow(userDto) {
 </head>
 <body>
 	<div class="container text-center">
-		<div class="row">
-			<div class="col">아이디</div>
-			<div class="col">이름</div>
-			<div class="col">생성날짜</div>
-			<div class="col">수정날짜</div>
-		</div>
-		<div class="row" th:each="userDto : ${userDtoList}" th:onclick="selectRow(userDto)">
-			<div class="col" th:text="${userDto.userId}"></div>
-			<div class="col" th:text="${userDto.userName}"></div>
-			<div class="col" th:text="${userDto.createDt}"></div>
-			<div class="col" th:text="${userDto.updateDt}"></div>
-		</div>
+	
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">아이디</th>
+					<th scope="col">이름</th>
+					<th scope="col">생성날짜</th>
+					<th scope="col">수정날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="userDto : ${userDtoList}" th:onclick="selectRow([[${userDto}]])">
+					<th scope="row" th:text="${userDtoStat.count}"></th>
+					<td class="col" th:text="${userDto.userId}"></td>
+		            <td class="col" th:text="${userDto.userName}"></td>
+		            <td class="col" th:text="${userDto.createDt}"></td>
+		            <td class="col" th:text="${userDto.updateDt}"></td>
+				</tr>
+			</tbody>
+		</table>
 
 		<div>
 			<form th:action="@{/users}" th:object="${userDto}" th:method="post">
 				<fieldset>
-					<p>사용자ID: <input th:type="text" th:field="*{userId}" style="width:300px;" /></p>
-					<p>사용자명: <input th:type="text" th:field="*{userName}" style="width:300px;" th:required="required" /></p>
-					<p>생성날짜: <input th:type="text" th:field="*{createDt}" style="width:300px;" /></p>
-					<p>수정날짜: <input th:type="text" th:field="*{updateDt}" style="width:300px;" /></p>
+					<p>사용자ID: <input th:type="text" th:field="*{userId}" style="width:300px" /></p>
+					<p>사용자명: <input th:type="text" th:field="*{userName}" style="width:300px" required="required" /></p>
+					<p>생성날짜: <input th:type="text" th:field="*{createDt}" style="width:300px" /></p>
+					<p>수정날짜: <input th:type="text" th:field="*{updateDt}" style="width:300px" /></p>
 					<p><input th:type="reset" value="초기화" /> <input th:type="submit" value="저장" /></p>
 				</fieldset>
 			</form>
 		</div>
+		
 	</div>
 </body>
 </html>
