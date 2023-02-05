@@ -55,24 +55,24 @@ public class App1Service {
 				.collect(Collectors.toList());
 	}
 	
-	public TbUser saveUsers(UserDto userDto) {
+	public UserDto saveUser(UserDto userDto) {
 		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userDto.getUserId());
 		
 		if (tbUserOpt.isPresent()) {
 			TbUser tbUser = UserMapper.INSTANCE.toTbUser(userDto);
 			tbUser.setTbUserEtcs(tbUserOpt.get().getTbUserEtcs());
-			return tbUserRepository.save(tbUser);
+			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		} else {
 			TbUser tbUser = new TbUser();
 			tbUser.setId(UUID.randomUUID().toString());
 			tbUser.setUserName(userDto.getUserName());
 			tbUser.setCreateDt(new Date());
 			tbUser.setUpdateDt(new Date());
-			return tbUserRepository.save(tbUser);
+			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		}
 	}
 	
-	public TbUser updateUsers(UserDto userDto) {
+	public UserDto updateUser(UserDto userDto) {
 		Optional<TbUser> tbUserOpt = tbUserRepository.findById(userDto.getUserId());
 		
 		if (tbUserOpt.isPresent()) {
@@ -81,7 +81,7 @@ public class App1Service {
 			tbUser.setUserName("이름3");
 			tbUser.setCreateDt(new Date());
 			tbUser.setUpdateDt(new Date());
-			return tbUserRepository.save(tbUser);
+			return UserMapper.INSTANCE.toUserDto(tbUserRepository.save(tbUser));
 		} else {
 			throw new BizException("Not found " + userDto.getUserId());
 		}

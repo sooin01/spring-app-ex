@@ -4,17 +4,15 @@
 <th:block th:replace="~{layout/header :: header}" />
 <script th:inline="javascript">
 function selectRow(userDto) {
-	$('#userId').val(userDto.userId);
-	$('#userName').val(userDto.userName);
-	$('#createDt').val(userDto.createDt);
-	$('#updateDt').val(userDto.updateDt);
+	delete userDto['userEtcs'];
+	var url = /*[[@{/saveUserForm}]]*/ null;
+	location.href =  url + "?" + $.param(userDto);
 }
 </script>
 </head>
 <body>
 	<div class="container text-center">
-	
-		<table class="table">
+		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
 					<th scope="col">번호</th>
@@ -25,7 +23,7 @@ function selectRow(userDto) {
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="userDto : ${userDtoList}" th:onclick="selectRow([[${userDto}]])">
+				<tr th:each="userDto : ${userDtoList}" th:ondblclick="selectRow([[${userDto}]])">
 					<th scope="row" th:text="${userDtoStat.count}"></th>
 					<td class="col" th:text="${userDto.userId}"></td>
 		            <td class="col" th:text="${userDto.userName}"></td>
@@ -34,19 +32,7 @@ function selectRow(userDto) {
 				</tr>
 			</tbody>
 		</table>
-
-		<div>
-			<form th:action="@{/users}" th:object="${userDto}" th:method="post">
-				<fieldset>
-					<p>사용자ID: <input th:type="text" th:field="*{userId}" style="width:300px" /></p>
-					<p>사용자명: <input th:type="text" th:field="*{userName}" style="width:300px" required="required" /></p>
-					<p>생성날짜: <input th:type="text" th:field="*{createDt}" style="width:300px" /></p>
-					<p>수정날짜: <input th:type="text" th:field="*{updateDt}" style="width:300px" /></p>
-					<p><input th:type="reset" value="초기화" /> <input th:type="submit" value="저장" /></p>
-				</fieldset>
-			</form>
-		</div>
-		
+		<a th:href="@{/saveUserForm}" class="btn btn-primary">등록</a>
 	</div>
 </body>
 </html>

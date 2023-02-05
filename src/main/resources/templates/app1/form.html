@@ -3,50 +3,37 @@
 <head>
 <th:block th:replace="~{layout/header :: header}" />
 <script th:inline="javascript">
-function selectRow(userDto) {
-	$('#userId').val(userDto.userId);
-	$('#userName').val(userDto.userName);
-	$('#createDt').val(userDto.createDt);
-	$('#updateDt').val(userDto.updateDt);
-}
 </script>
 </head>
 <body>
-	<div class="container text-center">
-	
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">번호</th>
-					<th scope="col">아이디</th>
-					<th scope="col">이름</th>
-					<th scope="col">생성날짜</th>
-					<th scope="col">수정날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="userDto : ${userDtoList}" th:onclick="selectRow([[${userDto}]])">
-					<th scope="row" th:text="${userDtoStat.count}"></th>
-					<td class="col" th:text="${userDto.userId}"></td>
-		            <td class="col" th:text="${userDto.userName}"></td>
-		            <td class="col" th:text="${userDto.createDt}"></td>
-		            <td class="col" th:text="${userDto.updateDt}"></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<div>
-			<form th:action="@{/users}" th:object="${userDto}" th:method="post">
-				<fieldset>
-					<p>사용자ID: <input th:type="text" th:field="*{userId}" style="width:300px" /></p>
-					<p>사용자명: <input th:type="text" th:field="*{userName}" style="width:300px" required="required" /></p>
-					<p>생성날짜: <input th:type="text" th:field="*{createDt}" style="width:300px" /></p>
-					<p>수정날짜: <input th:type="text" th:field="*{updateDt}" style="width:300px" /></p>
-					<p><input th:type="reset" value="초기화" /> <input th:type="submit" value="저장" /></p>
-				</fieldset>
-			</form>
-		</div>
-		
+	<div class="container">
+		<form th:action="@{/saveUser}" th:object="${userDto}" th:method="post">
+    		<div class="mb-3">
+				<label for="userId" class="form-label">사용자ID</label>
+				<input th:type="text" th:field="*{userId}" class="form-control" placeholder="자동으로 생성됩니다." readonly="readonly" />
+    		</div>
+    		<div class="mb-3">
+				<label for="userName" class="form-label">사용자명</label>
+				<input th:type="text" th:field="*{userName}" class="form-control" placeholder="사용자명" />
+    		</div>
+    		<div class="mb-3">
+				<label for="createDt" class="form-label">생성날짜</label>
+				<input th:type="text" th:field="*{createDt}" class="form-control" placeholder="자동으로 생성됩니다." readonly="readonly" />
+    		</div>
+    		<div class="mb-3">
+				<label for="updateDt" class="form-label">수정날짜</label>
+				<input th:type="text" th:field="*{updateDt}" class="form-control" placeholder="자동으로 생성됩니다." readonly="readonly" />
+    		</div>
+			<div class="row justify-content-between">
+				<div class="col-4">
+					<a th:href="@{/listUser}" class="btn btn-primary">목록</a>
+				</div>
+				<div class="col-4">
+					<button type="reset" class="btn btn-primary">초기화</button>
+					<button type="submit" class="btn btn-primary">저장</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
