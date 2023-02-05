@@ -9,6 +9,7 @@ public class UserReqDto {
 	private String userId;
 	@ApiModelProperty(required = true)
 	private String userName;
+	@ApiModelProperty(value = "생성날짜(yyyy-MM-dd)")
 	private String createDt;
 	private String updateDt;
 	
