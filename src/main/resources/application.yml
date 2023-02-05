@@ -18,6 +18,9 @@ spring:
         "[highlight_sql]": true
   thymeleaf:
     cache: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
 
 server:
   shutdown: graceful
